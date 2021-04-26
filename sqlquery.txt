@@ -1,0 +1,28 @@
+CREATE TABLE Student(
+		pk_bint_id BIGSERIAL,
+		vchr_name varchar(50),
+		vchr_reg varchar(30) UNIQUE,
+		dat_dob date,
+		vchr_gender varchar(10),
+		vchr_address varchar(300),
+		vchr_languages varchar(50),
+		fk_district_id BIGINT,
+		PRIMARY KEY(pk_bint_id),
+		FOREIGN KEY (fk_district_id) REFERENCES district(pk_bint_id));
+
+CREATE TABLE district(
+		pk_bint_id BIGSERIAL,
+		vchr_district_name varchar(50),
+		primary key (pk_bint_id),
+		UNIQUE(vchr_district_name));
+
+#####----ALTER TABLE district ADD CONSTRAINT vchr_district_name UNIQUE(vchr_district_name);
+
+		
+INSERT INTO district(vchr_district_name) VALUES
+					('Kasargod'),('Kannur'),('Wayanad'),('Calicut'),
+					('Malappuram'),('Palakkad'),('Thrissur'),('Ernakulam'),
+					('Idukki'),('Kollam'),('Kottayam'),('Alappuzha'),
+					('Pathanamthitta'),('Thiruvananthapuram');
+
+INSERT INTO Student VALUES(default,'idrees','gg1','1999-09-03','male','Akkdan house','English','Malappuram');

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-sm-10 jumbotron d-flex justify-content-center" style="margin-left: 7em;">
+<form method="post">
+    {% csrf_token %}
+    <h4 class="d-flex justify-content-center">View Students</h4>
+    <table class="table">
+        {% if students %}
+        <tr>
+            <th>Name</th>
+            <th>Register No</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>District</th>
+            <th>Address</th>
+            <th>Languages Known</th>
+            <th>Actions</th>
+
+        </tr>
+        {% for std in students %}
+        <tr>
+            <td>{{ std.vchr_name }}</td>
+            <td>{{ std.vchr_reg }}</td>
+            <td>{{ std.vchr_gender }}</td>
+            <td>{{ std.dat_dob }}</td>
+            <td>{{ std.fk_district.vchr_district_name }}</td>
+            <td>{{ std.vchr_address }}</td>
+            <td>{{ std.vchr_languages }}</td>
+            <td><a href="{% url 'updatepage' std.pk_bint_id %}" class="btn btn-primary" >Edit</a></td>
+            <td><a href="{% url 'deletepage' std.pk_bint_id %}" class="btn btn-danger" >Delete</a></td>
+
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</form>
+</div>
+{% endblock %}

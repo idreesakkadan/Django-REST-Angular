@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-sm-10 jumbotron d-flex justify-content-center" style="margin-left: 7em;">
+<form method="post">
+    {% csrf_token %}
+    <h4 class="d-flex justify-content-center">Add Student</h4>
+    <table class="table">
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Name</label></td>
+            <td><input type="text" name="name" class="form-control" required></td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Register No</label></td>
+            <td><input type="text" name="regno" class="form-control" required></td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Gender</label></td>
+            <td><input class="form-check-input" type="radio" name="gender"  value="male"  required>
+                <label class="form-check-label">Male</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="form-check-input" type="radio" name="gender"  value="female" required>
+                <label class="form-check-label">Female</label></td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Date of Birth</label></td>
+            <td><input type="date" name="dob" class="form-control" max="2015-12-31" required></td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">District</label></td>
+            <td><select name="district" class="form-control" required>
+                {% for dist in districts %}
+                <option value={{ dist.vchr_district_name }}>{{ dist.vchr_district_name }}</option>
+                {% endfor %}
+                
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Address</label></td>
+            <td><textarea name="address"  cols="30" rows="5" class="form-control"></textarea>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Languages Known</label></td>
+            <td>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="malayalam" name="lang">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Malayalam
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="English" name="lang">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      English
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Hindi" name="lang">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Hindi
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" class="btn btn-success" ></td>
+        </tr>
+    </table>
+</form>
+
+</div>
+
+{% endblock %}

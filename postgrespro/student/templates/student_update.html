@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-sm-10 jumbotron d-flex justify-content-center" style="margin-left: 7em;">
+<form method="post">
+    {% csrf_token %}
+    <h4 class="d-flex justify-content-center">Add Student</h4>
+    <table class="table">
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Name</label></td>
+            <td><input type="text" name="name" class="form-control" required value="{{student.vchr_name}}"></td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Register No</label></td>
+            <td><input type="text" name="regno" class="form-control" required value="{{student.vchr_reg}}" readonly></td>
+        </tr>
+        {% if student.vchr_gender == 'male' %}
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Gender</label></td>
+            <td><input class="form-check-input" type="radio" name="gender"  value="male" checked disabled >
+                <label class="form-check-label">Male</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="form-check-input" type="radio" name="gender"  value="female"  disabled>
+                <label class="form-check-label">Female</label></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Gender</label></td>
+            <td><input class="form-check-input" type="radio" name="gender"  value="male" disabled >
+                <label class="form-check-label">Male</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="form-check-input" type="radio" name="gender"  value="female" checked disabled>
+                <label class="form-check-label">Female</label></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Date of Birth</label></td>
+            <td><input type="text" name="dob" class="form-control" value="{{student.dat_dob}}" max="2015-12-31" disabled></td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">District</label></td>
+            <td><select name="district" class="form-control" >
+                {% for dist in district %}
+                    {% if dist.pk_bint_id == student.fk_district_id %}
+                    <option value={{dist.vchr_district_name}} selected>{{dist.vchr_district_name}}</option>
+                    {% else %}
+                        <option value={{ dist.vchr_district_name }}>{{ dist.vchr_district_name }}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Address</label></td>
+            <td><textarea name="address"  cols="30" rows="5" class="form-control">{{ student.vchr_address }}</textarea>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td><label class="col-sm-2 col-form-label">Languages Known</label></td>
+            <td>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="malayalam" name="lang">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Malayalam
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="English" name="lang">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      English
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Hindi" name="lang">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Hindi
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" class="btn btn-success" ></td>
+        </tr>
+    </table>
+</form>
+
+</div>
+
+{% endblock %}
